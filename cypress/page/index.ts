@@ -1,0 +1,6 @@
+export { MenuContentPage } from "./menu-content.page"
+export { ProductsList } from "./products-list.page"
+export { Login } from "./login.page"
+export { ShippingStep } from "./shipping-step.page"
+export { PaymentStep } from "./payment-step.page"
+export { ShoppingCart } from "./shopping-cart.page"

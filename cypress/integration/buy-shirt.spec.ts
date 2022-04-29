@@ -1,20 +1,34 @@
+import { MenuContentPage } from "../page/index";
+import { ProductsList } from "../page/index";
+import { Login } from "../page/index";
+import { ShippingStep } from "../page/index";
+import { PaymentStep } from "../page/index";
+import { ShoppingCart } from "../page/index";
+
+const menuContentPage = new MenuContentPage();
+const productsList = new ProductsList();
+const login = new Login();
+const shippingStep = new ShippingStep();
+const paymentStep = new PaymentStep();
+const shoppingCart = new ShoppingCart();
+
+
 describe("Buy a t-shirt", () => {
     it("then the t-shirt should be bought", () => {
-        cy.visit("http://automationpractice.com/");
-        cy.get("#block_top_menu > ul > li:nth-child(3) > a").click();
-        cy.get("#center_column a.button.ajax_add_to_cart_button.btn.btn-default").click();
-        cy.get('.button-container > .button-medium > span').click()
-        cy.get(".cart_navigation span").click();
-        cy.get("#email").type("aperdomobo@gmail.com");
-        cy.get("#passwd").type("WorkshopProtractor");
+        menuContentPage.visitMenuContentPage();
+        menuContentPage.goToTShirtMenu();
+        productsList.clickAddToCart();
+        productsList.clickProceedToCheckOut();
+        shoppingCart.proceedCheckOut();
+        login.typeEmail();
+        login.typePassword();
         // Debes completar la prueba ...
-        cy.get('#SubmitLogin > span').click()
-        cy.get('.cart_navigation > .button > span').click()
-        cy.get('#cgv').click()
-        cy.get('.cart_navigation > .button > span').click()
-        cy.get('.bankwire').click()
-        cy.get('#cart_navigation > .button > span').click()
-        cy.get("#center_column > div > p > strong")
-            .should("have.text", "Your order on My Store is complete.");
+        login.clickSubmitLogin();
+        shoppingCart.proceedCheckOut();
+        shippingStep.clickCheckBox()
+        shoppingCart.proceedCheckOut();
+        paymentStep.clickBankwire()
+        shoppingCart.proceedCheckOut();
+        shoppingCart.assertSucces()
     });
 });
